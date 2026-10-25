@@ -1,0 +1,278 @@
+// Licensed to Elasticsearch B.V. under one or more contributor
+// license agreements. See the NOTICE file distributed with
+// this work for additional information regarding copyright
+// ownership. Elasticsearch B.V. licenses this file to you under
+// the Apache License, Version 2.0 (the "License"); you may
+// not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+// Code generated from the elasticsearch-specification DO NOT EDIT.
+// https://github.com/elastic/elasticsearch-specification/tree/9fcf6a64c550d2e8090c8134867f200b56fd7fc7
+
+package types
+
+import (
+	"bytes"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"io"
+	"strconv"
+)
+
+// MemoryStats type.
+//
+// https://github.com/elastic/elasticsearch-specification/blob/9fcf6a64c550d2e8090c8134867f200b56fd7fc7/specification/nodes/_types/Stats.ts#L793-L834
+type MemoryStats struct {
+	// AdjustedTotal If the amount of physical memory has been overridden using the
+	// `es`.`total_memory_bytes` system property then this reports the overridden
+	// value. Otherwise it reports the same value as `total`.
+	AdjustedTotal *string `json:"adjusted_total,omitempty"`
+	// AdjustedTotalInBytes If the amount of physical memory has been overridden using the
+	// `es`.`total_memory_bytes` system property then this reports the overridden
+	// value in bytes. Otherwise it reports the same value as `total_in_bytes`.
+	AdjustedTotalInBytes *int64 `json:"adjusted_total_in_bytes,omitempty"`
+	// Free Amount of free physical memory.
+	Free *string `json:"free,omitempty"`
+	// FreeInBytes Amount of free physical memory in bytes.
+	FreeInBytes     *int64  `json:"free_in_bytes,omitempty"`
+	Resident        *string `json:"resident,omitempty"`
+	ResidentInBytes *int64  `json:"resident_in_bytes,omitempty"`
+	Share           *string `json:"share,omitempty"`
+	ShareInBytes    *int64  `json:"share_in_bytes,omitempty"`
+	// Total Total amount of physical memory.
+	Total *string `json:"total,omitempty"`
+	// TotalInBytes Total amount of physical memory in bytes.
+	TotalInBytes        *int64  `json:"total_in_bytes,omitempty"`
+	TotalVirtual        *string `json:"total_virtual,omitempty"`
+	TotalVirtualInBytes *int64  `json:"total_virtual_in_bytes,omitempty"`
+	// Used Amount of used physical memory.
+	Used *string `json:"used,omitempty"`
+	// UsedInBytes Amount of used physical memory in bytes.
+	UsedInBytes *int64 `json:"used_in_bytes,omitempty"`
+}
+
+func (s *MemoryStats) UnmarshalJSON(data []byte) error {
+
+	dec := json.NewDecoder(bytes.NewReader(data))
+
+	for {
+		t, err := dec.Token()
+		if err != nil {
+			if errors.Is(err, io.EOF) {
+				break
+			}
+			return err
+		}
+
+		switch t {
+
+		case "adjusted_total":
+			var tmp json.RawMessage
+			if err := dec.Decode(&tmp); err != nil {
+				return fmt.Errorf("%s | %w", "AdjustedTotal", err)
+			}
+			o := string(tmp[:])
+			o, err = strconv.Unquote(o)
+			if err != nil {
+				o = string(tmp[:])
+			}
+			s.AdjustedTotal = &o
+
+		case "adjusted_total_in_bytes":
+			var tmp any
+			dec.Decode(&tmp)
+			switch v := tmp.(type) {
+			case string:
+				value, err := strconv.ParseInt(v, 10, 64)
+				if err != nil {
+					return fmt.Errorf("%s | %w", "AdjustedTotalInBytes", err)
+				}
+				s.AdjustedTotalInBytes = &value
+			case float64:
+				f := int64(v)
+				s.AdjustedTotalInBytes = &f
+			}
+
+		case "free":
+			var tmp json.RawMessage
+			if err := dec.Decode(&tmp); err != nil {
+				return fmt.Errorf("%s | %w", "Free", err)
+			}
+			o := string(tmp[:])
+			o, err = strconv.Unquote(o)
+			if err != nil {
+				o = string(tmp[:])
+			}
+			s.Free = &o
+
+		case "free_in_bytes":
+			var tmp any
+			dec.Decode(&tmp)
+			switch v := tmp.(type) {
+			case string:
+				value, err := strconv.ParseInt(v, 10, 64)
+				if err != nil {
+					return fmt.Errorf("%s | %w", "FreeInBytes", err)
+				}
+				s.FreeInBytes = &value
+			case float64:
+				f := int64(v)
+				s.FreeInBytes = &f
+			}
+
+		case "resident":
+			var tmp json.RawMessage
+			if err := dec.Decode(&tmp); err != nil {
+				return fmt.Errorf("%s | %w", "Resident", err)
+			}
+			o := string(tmp[:])
+			o, err = strconv.Unquote(o)
+			if err != nil {
+				o = string(tmp[:])
+			}
+			s.Resident = &o
+
+		case "resident_in_bytes":
+			var tmp any
+			dec.Decode(&tmp)
+			switch v := tmp.(type) {
+			case string:
+				value, err := strconv.ParseInt(v, 10, 64)
+				if err != nil {
+					return fmt.Errorf("%s | %w", "ResidentInBytes", err)
+				}
+				s.ResidentInBytes = &value
+			case float64:
+				f := int64(v)
+				s.ResidentInBytes = &f
+			}
+
+		case "share":
+			var tmp json.RawMessage
+			if err := dec.Decode(&tmp); err != nil {
+				return fmt.Errorf("%s | %w", "Share", err)
+			}
+			o := string(tmp[:])
+			o, err = strconv.Unquote(o)
+			if err != nil {
+				o = string(tmp[:])
+			}
+			s.Share = &o
+
+		case "share_in_bytes":
+			var tmp any
+			dec.Decode(&tmp)
+			switch v := tmp.(type) {
+			case string:
+				value, err := strconv.ParseInt(v, 10, 64)
+				if err != nil {
+					return fmt.Errorf("%s | %w", "ShareInBytes", err)
+				}
+				s.ShareInBytes = &value
+			case float64:
+				f := int64(v)
+				s.ShareInBytes = &f
+			}
+
+		case "total":
+			var tmp json.RawMessage
+			if err := dec.Decode(&tmp); err != nil {
+				return fmt.Errorf("%s | %w", "Total", err)
+			}
+			o := string(tmp[:])
+			o, err = strconv.Unquote(o)
+			if err != nil {
+				o = string(tmp[:])
+			}
+			s.Total = &o
+
+		case "total_in_bytes":
+			var tmp any
+			dec.Decode(&tmp)
+			switch v := tmp.(type) {
+			case string:
+				value, err := strconv.ParseInt(v, 10, 64)
+				if err != nil {
+					return fmt.Errorf("%s | %w", "TotalInBytes", err)
+				}
+				s.TotalInBytes = &value
+			case float64:
+				f := int64(v)
+				s.TotalInBytes = &f
+			}
+
+		case "total_virtual":
+			var tmp json.RawMessage
+			if err := dec.Decode(&tmp); err != nil {
+				return fmt.Errorf("%s | %w", "TotalVirtual", err)
+			}
+			o := string(tmp[:])
+			o, err = strconv.Unquote(o)
+			if err != nil {
+				o = string(tmp[:])
+			}
+			s.TotalVirtual = &o
+
+		case "total_virtual_in_bytes":
+			var tmp any
+			dec.Decode(&tmp)
+			switch v := tmp.(type) {
+			case string:
+				value, err := strconv.ParseInt(v, 10, 64)
+				if err != nil {
+					return fmt.Errorf("%s | %w", "TotalVirtualInBytes", err)
+				}
+				s.TotalVirtualInBytes = &value
+			case float64:
+				f := int64(v)
+				s.TotalVirtualInBytes = &f
+			}
+
+		case "used":
+			var tmp json.RawMessage
+			if err := dec.Decode(&tmp); err != nil {
+				return fmt.Errorf("%s | %w", "Used", err)
+			}
+			o := string(tmp[:])
+			o, err = strconv.Unquote(o)
+			if err != nil {
+				o = string(tmp[:])
+			}
+			s.Used = &o
+
+		case "used_in_bytes":
+			var tmp any
+			dec.Decode(&tmp)
+			switch v := tmp.(type) {
+			case string:
+				value, err := strconv.ParseInt(v, 10, 64)
+				if err != nil {
+					return fmt.Errorf("%s | %w", "UsedInBytes", err)
+				}
+				s.UsedInBytes = &value
+			case float64:
+				f := int64(v)
+				s.UsedInBytes = &f
+			}
+
+		}
+	}
+	return nil
+}
+
+// NewMemoryStats returns a MemoryStats.
+func NewMemoryStats() *MemoryStats {
+	r := &MemoryStats{}
+
+	return r
+}
